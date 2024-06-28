@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap");
+
+:root {
+  /* fonts */
+  --font-family: "Ubuntu Sans Mono", monospace;
+  --font-family-two: "Poppins", sans-serif;
+  --font-color-white: white;
+  --font-color-black: black;
+
+  /* colors */
+  --body-background: rgba(190, 55, 55, 0.903);
+  --bg-ul: rgba(171, 178, 185, 0.385);
+  --bg-li-hover: rgba(179, 200, 219, 0.69);
+  --bg-filter: rgba(72, 79, 85, 0.737);
+  --white-background: white;
+  --bg-filter-input: #5f3ea12e;
+  --bg-filter-button: rgb(248, 61, 61);
+  --bg-color-about: #8c1919;
+  --body-background-tehnicari: #8c1919;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-two);
+}
+
+.choose-page {
+  background-image: url(../src/assets/Allied-background-nologo-red.jpg);
+}
+
+.landing-page {
+  background-image: url(../src/assets/Allied-background-nologo-red.jpg);
+}
+
+.contact-info-text {
+  text-align: start;
+}
+
+.registration-container {
+  background-image: url(../src/assets/Allied-background-nologo-red.jpg);
+}
+
+.login-container {
+  background-image: url(../src/assets/Allied-background-nologo-red.jpg);
+}

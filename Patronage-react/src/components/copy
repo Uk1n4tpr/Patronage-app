@@ -1,0 +1,87 @@
+
+
+        {showFilter ? (
+          <>
+            {mjestoPrebivalistaMed === "" &&
+            strukaMed === "" &&
+            vrstaUslugeMed === "" ? (
+              <Filter
+                tehnicari={tehnicari}
+                handleHideFilter={handleHideFilter}
+                handleMPChange={handleMPChange}
+                handleSChange={handleSChange}
+                handleVUChange={handleVUChange}
+                handleFilterResults={handleFilterResults}
+                mjestoPrebivalistaMed={mjestoPrebivalistaMed}
+                strukaMed={strukaMed}
+                vrstaUslugeMed={vrstaUslugeMed}
+                setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
+                setStrukaMed={setStrukaMed}
+                setVrstaUslugeMed={setVrstaUslugeMed}
+                filteredMedStaff={filteredMedStaff}
+                setFilteredMedStaff={setFilteredMedStaff}
+              />
+            ) : (
+              <>
+                {tehnicari.mjestoPrebivalista === mjestoPrebivalistaMed &&
+                tehnicari.struka === strukaMed ? (
+                  <Filter
+                    tehnicari={tehnicari}
+                    handleHideFilter={handleHideFilter}
+                    handleMPChange={handleMPChange}
+                    handleSChange={handleSChange}
+                    handleVUChange={handleVUChange}
+                    handleFilterResults={handleFilterResults}
+                    mjestoPrebivalistaMed={mjestoPrebivalistaMed}
+                    strukaMed={strukaMed}
+                    vrstaUslugeMed={vrstaUslugeMed}
+                    setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
+                    setStrukaMed={setStrukaMed}
+                    setVrstaUslugeMed={setVrstaUslugeMed}
+                    filteredMedStaff={filteredMedStaff}
+                    setFilteredMedStaff={setFilteredMedStaff}
+                    element={<FilteredMeds />}
+                  />
+                ) : (
+                  <Filter
+                    tehnicari={tehnicari}
+                    handleHideFilter={handleHideFilter}
+                    handleMPChange={handleMPChange}
+                    handleSChange={handleSChange}
+                    handleVUChange={handleVUChange}
+                    handleFilterResults={handleFilterResults}
+                    mjestoPrebivalistaMed={mjestoPrebivalistaMed}
+                    strukaMed={strukaMed}
+                    vrstaUslugeMed={vrstaUslugeMed}
+                    setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
+                    setStrukaMed={setStrukaMed}
+                    setVrstaUslugeMed={setVrstaUslugeMed}
+                    filteredMedStaff={filteredMedStaff}
+                    setFilteredMedStaff={setFilteredMedStaff}
+                    element={<EmptyFilter />}
+                  />
+                )}
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <FilterButton
+              handleFilterButton={handleFilterButton}
+              showFilter={showFilter}
+              setShowFilter={setShowFilter}
+            />
+          </>
+        )}
+
+        //Filter try
+
+        {mjestoPrebivalistaMed === "" &&
+      strukaMed === "" &&
+      vrstaUslugeMed === "" ? (
+        <></>
+      ) : (
+        <>
+          {filteredMedStaff.length === 0 ? <EmptyFilter /> : <FilteredMeds />}
+        </>
+      )}
