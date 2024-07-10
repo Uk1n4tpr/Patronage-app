@@ -6,6 +6,7 @@ import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import { UserContextProvider } from "../context/UserContext";
 import Dashboard from "./components/Dashboard";
+import ProfileSetUp from "./components/ProfileSetUp";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/registration" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/profileSet" element={<ProfileSetUp />}></Route>
           <Route path='/dashboard' element={<Dashboard />}></Route>
         </Routes>
       </Router>

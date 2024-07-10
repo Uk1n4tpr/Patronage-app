@@ -62,6 +62,31 @@ const registerUser = async (req, res) => {
   }
 };
 
+//set profile requirements
+
+const profileSetUser = async (req, res) => {
+  const { mjestoPrebivalista, struka, vrsteUsluga, godineStaza, oKorisniku } =
+    req.body;
+  try {
+    const newSetProfile = await User.findByIdAndUpdate(
+      User._id,
+      {
+        $set: {
+          mjestoPrebivalista: mjestoPrebivalista,
+          struka: struka,
+          vrstaUsluga: vrsteUsluga,
+          godineStaza: godineStaza,
+          oKorisniku: oKorisniku,
+        },
+      },
+      { new: true, useFindAndModify: false }
+    );
+    console.log("Updated User:", newSetProfile);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const loginUser = async (req, res) => {
   try {
     const { userName, email, password } = req.body;
@@ -83,7 +108,17 @@ const loginUser = async (req, res) => {
     const match = await comparePasswords(password, user.password);
     if (match) {
       jwt.sign(
-        { email: user.email, id: user._id, name: user.name },
+        {
+          id: user._id,
+          name: user.name,
+          lastName: user.lastName,
+          email: user.email,
+          mjestoPrebivalista: user.mjestoPrebivalista,
+          sturka: user.struka,
+          vrsteUsluga: user.vrstaUsluga,
+          godineStaza: user.godineStaza,
+          oKorisniku: user.oKorisniku,
+        },
         process.env.JWT_SECRET,
         {},
         (err, token) => {
@@ -95,7 +130,7 @@ const loginUser = async (req, res) => {
       );
     }
     if (!match) {
-      res.json({error:"Passwords do not match"})
+      res.json({ error: "Passwords do not match" });
     }
   } catch (error) {
     console.log(error);
@@ -119,6 +154,7 @@ const getProfile = (req, res) => {
 module.exports = {
   test,
   registerUser,
+  profileSetUser,
   loginUser,
   getProfile,
 };

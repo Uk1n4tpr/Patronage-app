@@ -32,7 +32,7 @@ export default function Register() {
       } else {
         setData({});
         toast.success("Registration succesful, Welcome!");
-        navigate('/login')
+        navigate('/profileSet')
       }
     } catch (error) {
       console.log(error)

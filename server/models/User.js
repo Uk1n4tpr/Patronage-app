@@ -7,7 +7,12 @@ const UserSchema = new Schema({
     lastName: {type:String, required: true},
     userName: {type:String, required: true, unique: true},
     email: {type:String, required: true, unique: true},
-    password: {type:String, required: true}
+    password: {type:String, required: true},
+    mjestoPrebivalista: {type:String},
+    struka: {type: String},
+    vrstaUsluga: {type: Array},
+    godineStaza: {type: Number},
+    oKorisniku: {type: String}
 })
 
 const UserModel = model('User', UserSchema)
