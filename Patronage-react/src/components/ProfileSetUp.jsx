@@ -1,21 +1,28 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 import { struka } from "../API_MINE/struka";
 import { gradovi } from "../API_MINE/gradovi";
 import { vrsteUsluga } from "../API_MINE/vrsteUsluga";
 import Contact from "./Contact";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function ProfileSetUp() {
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const [menu, setMenu] = useState(false);
-  const [checkedState, setCheckedState] = useState(
-    new Array(vrsteUsluga.length).fill(false)
-  )
+  const [checkedState, setCheckedState] = useState([]);
   const [profile, setProfile] = useState({
-    mjestoPrebivalista: "",
-    struka: "",
-    vrsteUsluga: [],
-    godineStaza: 0,
-    oKorisniku: "",
+    email: user.email,
+    phone: "",
+    facebook: "",
+    instagram: "",
+    mjestoPrebivalistaCheck: "",
+    strukaCheck: "",
+    vrsteUslugaCheck: [],
+    godineStazaCheck: 0,
+    oKorisnikuCheck: "",
   });
 
   const menuRef = useRef(null);
@@ -40,18 +47,53 @@ function ProfileSetUp() {
     navRef.current.style.background = "none";
   };
 
-  const handleVUSet = (position) => {
-    const updatedCheckedState = checkedState.map((vuCheck, index) => { 
-        index === position ? !vu : vu
-     })
-     setCheckedState(updatedCheckedState)
-     console.log(updatedCheckedState)
+  const handleVUSet = (e) => {
+    const value = e.target.value;
+    if (e.target.checked) {
+      setCheckedState([...checkedState, value]);
+    } else {
+      setCheckedState(checkedState.filter((item) => item !== value));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleCheckboxSubmit = (e) => {
     e.preventDefault();
-    const { mjestoPrebivalista, struka, vrsteUsluga, godineStaza, oKorisniku } =
-      data;
+    setProfile({ ...profile, vrsteUslugaCheck: checkedState });
+  };
+  console.log(profile.vrsteUslugaCheck);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const {
+      email,
+      phone,
+      facebook,
+      instagram,
+      mjestoPrebivalistaCheck,
+      strukaCheck,
+      vrsteUslugaCheck,
+      godineStazaCheck,
+      oKorisnikuCheck,
+    } = profile;
+    console.log(profile.vrsteUslugaCheck);
+    try {
+      const { profile } = await axios.post("/profileSetUp", {
+        email,
+        phone,
+        facebook,
+        instagram,
+        mjestoPrebivalistaCheck,
+        strukaCheck,
+        vrsteUslugaCheck,
+        godineStazaCheck,
+        oKorisnikuCheck,
+      });
+      console.log(profile);
+      setProfile({});
+      navigate("/userProfile");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -109,13 +151,55 @@ function ProfileSetUp() {
           >
             <div className="bg-gray-400/35 mt-3 p-3 flex flex-col justify-between items-center text-center text-xl rounded-lg w-full">
               <div className="flex flex-col justify-center items-center w-full py-5">
-                <label>MJESTO PREBIVALISTA</label>
-                <select
-                  value={profile.mjestoPrebivalista}
+                <label>TELEFON</label>
+                <input
+                  value={profile.phone}
                   onChange={(e) => {
                     setProfile({
                       ...profile,
-                      mjestoPrebivalista: e.target.value,
+                      phone: e.target.value,
+                    });
+                  }}
+                  className="w-full h-[50px] text-center font-semibold text-black border-b-orange-400 border-b-4 rounded-lg bg-white/0"
+                  type="text"
+                />
+              </div>
+              <div className="flex flex-col justify-center items-center w-full py-5">
+                <label>FACEBOOK</label>
+                <input
+                  value={profile.facebook}
+                  onChange={(e) => {
+                    setProfile({
+                      ...profile,
+                      facebook: e.target.value,
+                    });
+                  }}
+                  className="w-full h-[50px] text-center font-semibold text-black border-b-orange-400 border-b-4 rounded-lg bg-white/0"
+                  type="text"
+                />
+              </div>
+              <div className="flex flex-col justify-center items-center w-full py-5">
+                <label>INSTAGRAM</label>
+                <input
+                  value={profile.instagram}
+                  onChange={(e) => {
+                    setProfile({
+                      ...profile,
+                      instagram: e.target.value,
+                    });
+                  }}
+                  className="w-full h-[50px] text-center font-semibold text-black border-b-orange-400 border-b-4 rounded-lg bg-white/0"
+                  type="text"
+                />
+              </div>
+              <div className="flex flex-col justify-center items-center w-full py-5">
+                <label>MJESTO PREBIVALISTA</label>
+                <select
+                  value={profile.mjestoPrebivalistaCheck}
+                  onChange={(e) => {
+                    setProfile({
+                      ...profile,
+                      mjestoPrebivalistaCheck: e.target.value,
                     });
                   }}
                   className="w-full h-[50px] text-center text-semibold text-black border-b-orange-400 border-b-4 rounded-lg bg-white/0"
@@ -132,9 +216,9 @@ function ProfileSetUp() {
               <div className="flex flex-col justify-center items-center w-full py-5">
                 <label>STRUKA</label>
                 <select
-                  value={profile.struka}
+                  value={profile.strukaCheck}
                   onChange={(e) => {
-                    setProfile({ ...profile, struka: e.target.value });
+                    setProfile({ ...profile, strukaCheck: e.target.value });
                   }}
                   className="w-full h-[50px] text-center text-semibold text-black border-b-orange-400 border-b-4 rounded-lg bg-white/0"
                 >
@@ -161,10 +245,7 @@ function ProfileSetUp() {
                             className="w-[30%]"
                             type="checkbox"
                             value={vu.usluga}
-                            checked={checkedState[indexVu]}
-                            onChange={() => {
-                              handleVUSet(indexVu)
-                            }}
+                            onChange={handleVUSet}
                           />{" "}
                           <div className="text-[12px]">{vu.usluga}</div>
                         </div>
@@ -172,7 +253,7 @@ function ProfileSetUp() {
                     })}
                   </div>
                   <button
-                    onClick={handleVUSet}
+                    onClick={handleCheckboxSubmit}
                     className="bg-orange-400 rounded-xl text-md"
                   >
                     PRILOZITE VRSTE USLUGA
@@ -182,9 +263,12 @@ function ProfileSetUp() {
               <div className="flex flex-col justify-center items-center w-full py-5">
                 <label>GODINE STAZA</label>
                 <input
-                  value={profile.godineStaza}
+                  value={profile.godineStazaCheck}
                   onChange={(e) => {
-                    setProfile({ ...profile, godineStaza: e.target.value });
+                    setProfile({
+                      ...profile,
+                      godineStazaCheck: e.target.value,
+                    });
                   }}
                   className="w-full h-[50px] text-center text-semibold text-black border-b-orange-400 border-b-4 rounded-lg bg-white/0"
                   type="number"
@@ -193,9 +277,9 @@ function ProfileSetUp() {
               <div className="flex flex-col justify-center items-center w-full py-5">
                 <label>NESTO O SEBI</label>
                 <textarea
-                  value={profile.oKorisniku}
+                  value={profile.oKorisnikuCheck}
                   onChange={(e) => {
-                    setProfile({ ...profile, oKorisniku: e.target.value });
+                    setProfile({ ...profile, oKorisnikuCheck: e.target.value });
                   }}
                   className="text-start p-2 w-full h-[128px] text-semibold text-black text-sm border border-orange-400 border-b-4 rounded-lg bg-white/0"
                   placeholder="Upisite nesto o svome skolovanju, staziranju, ranim mjestima i iskustvu."

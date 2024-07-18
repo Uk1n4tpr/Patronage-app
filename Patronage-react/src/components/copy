@@ -85,3 +85,148 @@
           {filteredMedStaff.length === 0 ? <EmptyFilter /> : <FilteredMeds />}
         </>
       )}
+
+      ///////////////////////////////////////////////////////
+      /* const handleFilterResults = () => {
+    if (
+      mjestoPrebivalistaMed === "" &&
+      strukaMed === "" &&
+      vrstaUslugeMed === ""
+    ) {
+      setFilteredMedStaff([]);
+    } else if (
+      mjestoPrebivalistaMed !== "" &&
+      strukaMed === "" &&
+      vrstaUslugeMed === ""
+    ) {
+      let filterArray = [];
+      users.map((medStf, indexMed) => {
+        if (users[indexMed].mjestoPrebivalista === mjestoPrebivalistaMed) {
+          filterArray.push(medStf);
+          setFilteredMedStaff([...filterArray, users[indexMed]]);
+        }else {
+          setFilteredMedStaff([])
+        }
+      });
+    } else if (
+      mjestoPrebivalistaMed !== "" &&
+      strukaMed !== "" &&
+      vrstaUslugeMed === ""
+    ) {
+      let filterArray = [];
+      users.map((medStf, indexMed) => {
+        if (
+          users[indexMed].mjestoPrebivalista === mjestoPrebivalistaMed &&
+          users[indexMed].struka == strukaMed
+        ) {
+          filterArray.push(medStf);
+          setFilteredMedStaff([...filterArray, users[indexMed]]);
+        } else {
+          setFilteredMedStaff([])
+        }
+      });
+    } else if (
+      mjestoPrebivalistaMed !== "" &&
+      strukaMed === "" &&
+      vrstaUslugeMed !== ""
+    ) {
+      let filterArray = [];
+      users.map((medStf, indexMed) => {
+        if (
+          users[indexMed].mjestoPrebivalista === mjestoPrebivalistaMed &&
+          users[indexMed].vrstaUsluga.includes(vrstaUslugeMed)
+        ) {
+          filterArray.push(medStf);
+          setFilteredMedStaff([...filterArray, users[indexMed]]);
+        }else {
+          setFilteredMedStaff([])
+        }
+      });
+    } else if (
+      mjestoPrebivalistaMed !== "" &&
+      strukaMed !== "" &&
+      vrstaUslugeMed !== ""
+    ) {
+      let filterArray = [];
+      users.map((medStf, indexMed) => {
+        if (
+          users[indexMed].mjestoPrebivalista === mjestoPrebivalistaMed &&
+          users[indexMed].struka === strukaMed &&
+          users[indexMed].vrstaUsluga.includes(vrstaUslugeMed)
+        ) {
+          filterArray.push(medStf);
+          setFilteredMedStaff([...filterArray, users[indexMed]]);
+        }else {
+          setFilteredMedStaff([])
+        }
+      });
+    } else if (
+      mjestoPrebivalistaMed === "" &&
+      strukaMed !== "" &&
+      vrstaUslugeMed === ""
+    ) {
+      let filterArray = [];
+      users.map((medStf, indexMed) => {
+        if (users[indexMed].struka === strukaMed) {
+          filterArray.push(medStf);
+          setFilteredMedStaff([...filterArray, users[indexMed]]);
+        }else {
+          setFilteredMedStaff([])
+        }
+      });
+    } else if (
+      mjestoPrebivalistaMed === "" &&
+      strukaMed !== "" &&
+      vrstaUslugeMed !== ""
+    ) {
+      let filterArray = [];
+      users.map((medStf, indexMed) => {
+        if (
+          users[indexMed].struka === strukaMed &&
+          users[indexMed].vrstaUsluga.includes(vrstaUslugeMed)
+        ) {
+          filterArray.push(medStf);
+          setFilteredMedStaff([...filterArray, users[indexMed]]);
+        }else {
+          setFilteredMedStaff([])
+        }
+      });
+    } else if (
+      mjestoPrebivalistaMed === "" &&
+      strukaMed === "" &&
+      vrstaUslugeMed !== ""
+    ) {
+      let filterArray = [];
+      users.map((medStf, indexMed) => {
+        if (users[indexMed].vrstaUsluga.includes(vrstaUslugeMed)) {
+          filterArray.push(medStf);
+          setFilteredMedStaff([...filterArray, users[indexMed]]);
+        }else {
+          setFilteredMedStaff([])
+        }
+      });
+    }
+    console.log(filteredMedStaff);
+  }; */
+
+  const [mjestoPrebivalistaMed, setMjestoPrebivalistaMed] = useState("");
+  const [strukaMed, setStrukaMed] = useState("");
+  const [vrstaUslugeMed, setVrstaUslugeMed] = useState("");
+  const [filteredMedStaff, setFilteredMedStaff] = useState([]);
+
+
+  /////////proton vpn FK%(Xrsc&p?=OXPU
+  
+  const getFilteredUser = async (req, res) => {
+    const {fonudUser} = req.body;
+    try {
+      const user = await User.findOne({fonudUser});
+      if(!user){
+        console.log('errorfinding user')
+      }
+      res.json(user);
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };

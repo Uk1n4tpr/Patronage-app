@@ -1,9 +1,5 @@
 export const gradovi = [
   {
-    idCity: 0,
-    city: ''
-  },
-  {
     idCity: 1,
     city: "Banovići",
   },

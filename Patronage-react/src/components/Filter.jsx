@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useContext } from "react";
 import FilteredMeds from "./FilteredMeds";
 import EmptyFilter from "./EmptyFilter";
 import { gradovi } from "../API_MINE/gradovi";
@@ -7,22 +8,17 @@ import { vrsteUsluga } from "../API_MINE/vrsteUsluga";
 
 const Filter = (props) => {
   const {
+    filteredUsers,
     mjestoPrebivalistaMed,
-    setMjestoPrebivalistaMed,
     strukaMed,
-    setStrukaMed,
     vrstaUslugeMed,
-    setVrstaUslugeMed,
-    filteredMedStaff,
-    setFilteredMedStaff,
     handleMPChange,
     handleSChange,
     handleVUChange,
     handleFilterResults,
-    tehnicari,
     handleHideFilter,
   } = props;
-
+  console.log(filteredUsers)
   return (
     <div className="filter flex flex-col items-center justify-center w-full h-auto text-center bg-gray-400/35">
       <h1 className="text-white text-1xl font-semibold py-2">
@@ -96,25 +92,12 @@ const Filter = (props) => {
       >
         <i className="text-white text-[30px] fa-solid fa-hand-point-left"></i>
       </div>
-      {mjestoPrebivalistaMed === "" &&
-      strukaMed === "" &&
-      vrstaUslugeMed === "" ? (
-        <></>
+      {filteredUsers.length === 0 ? (
+        <EmptyFilter />
       ) : (
-        <>
-          {filteredMedStaff.length === 0 ? (
-            <EmptyFilter />
-          ) : (
-            <FilteredMeds
-              tehnicari={tehnicari}
-              filteredMedStaff={filteredMedStaff}
-              setFilteredMedStaff={setFilteredMedStaff}
-              setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
-              setStrukaMed={setStrukaMed}
-              setVrstaUslugeMed={setVrstaUslugeMed}
-            />
-          )}
-        </>
+        <FilteredMeds
+          filteredUsers={filteredUsers}
+        />
       )}
     </div>
   );

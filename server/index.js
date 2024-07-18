@@ -2,7 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const PORT = 8000;
-const cookieParser = require('cookie-parser')
+const session = require("express-session");
+const path = require('path')
 
 const app = express();
 
@@ -16,9 +17,22 @@ mongoose
   });
 
 //middleware
-app.use(express.json())
-app.use(cookieParser())
-app.use(express.urlencoded({extended: false}))
+
+app.use(
+  session({
+    name: process.env.SESSION_NAME,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 12,
+      secure: false,
+    },
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use("/", require("./routes/auth"));
 

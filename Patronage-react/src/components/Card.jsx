@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import userImg from "../assets/placeholder-200x200.jpg";
+import { UserContext } from "../../context/UserContext";
 
 export default function Card(props) {
-  const { tehnicari, indexTeh } = props;
+  const { indexTeh } = props;
+  const {users} = useContext(UserContext)
 
   const userRef = useRef(null);
 
@@ -34,8 +36,8 @@ export default function Card(props) {
         />
       </div>
       <div className="w-full flex flex-col justify-center items-center py-2">
-        <p className="max-w-full text-wrap">{tehnicari[indexTeh].ime}</p>
-        <p className="max-w-full">{tehnicari[indexTeh].struka}</p>
+        <p className="max-w-full text-wrap">{users[indexTeh].name}</p>
+        <p className="max-w-full">{users[indexTeh].struka}</p>
       </div>
       <div
         ref={userRef}
@@ -55,15 +57,15 @@ export default function Card(props) {
               alt="user image"
             />
           </div>
-          <p className="p-2">Ime: {tehnicari[indexTeh].ime}</p>
-          <p className="p-2">Prezime: {tehnicari[indexTeh].prezime}</p>
-          <p className="p-2">Struka: {tehnicari[indexTeh].struka}</p>
+          <p className="p-2">Ime: {users[indexTeh].name}</p>
+          <p className="p-2">Prezime: {users[indexTeh].lastName}</p>
+          <p className="p-2">Struka: {users[indexTeh].struka}</p>
           <p className="p-2">
-            Mjesto prebivalista: {tehnicari[indexTeh].mjestoPrebivalista}
+            Mjesto prebivalista: {users[indexTeh].mjestoPrebivalista}
           </p>
           <div className="p-2  flex-col">
             Usluge:{" "}
-            {tehnicari[indexTeh].usluge.map((usluga, indexUsluga) => {
+            {users[indexTeh].vrstaUsluga.map((usluga, indexUsluga) => {
               return (
                 <p key={indexUsluga} className="text-[10px]">
                   {usluga}

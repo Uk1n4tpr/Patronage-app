@@ -1,98 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import FilterButton from "./FilterButton";
 import Filter from "./Filter";
 import Tehnicari from "./Tehnicari";
-import EmptyFilter from "./EmptyFilter";
-import FilteredMeds from "./FilteredMeds";
+import { UserContext } from "../../context/UserContext";
+import { gradovi } from "../API_MINE/gradovi";
 import { struka } from "../API_MINE/struka";
+import { vrsteUsluga } from "../API_MINE/vrsteUsluga";
 
 function LandingPage(props) {
   const { handleBackToChoosePage } = props;
-  const tehnicari = [
-    {
-      id: 1,
-      ime: "Uros",
-      prezime: "Kljecanin",
-      struka: "tehnicar",
-      mjestoPrebivalista: "Banja Luka",
-      usluge: ["injekcija", "infuzije", "previjanja", "vadjenje krvi"],
-      img: "userImg",
-    },
-    {
-      id: 2,
-      ime: "Andrea",
-      prezime: "Kljecanin-Lazic",
-      struka: "dipl. med. lab. ing.",
-      mjestoPrebivalista: "Banja Luka",
-      usluge: ["injekcija", "infuzije", "vadjenje krvi"],
-      img: "userImg",
-    },
-    {
-      id: 3,
-      ime: "Uros",
-      prezime: "Kljecanin",
-      struka: "tehnicar",
-      mjestoPrebivalista: "Banja Luka",
-      usluge: ["injekcija", "infuzije", "previjanja", "vadjenje krvi"],
-      img: "userImg",
-    },
-    {
-      id: 2,
-      ime: "Andrea",
-      prezime: "Kljecanin-Lazic",
-      struka: "dipl. med. lab. ing.",
-      mjestoPrebivalista: "Banja Luka",
-      usluge: ["injekcija", "infuzije", "vadjenje krvi"],
-      img: "userImg",
-    },
-    {
-      id: 4,
-      ime: "Uros",
-      prezime: "Kljecanin",
-      struka: "tehnicar",
-      mjestoPrebivalista: "Banja Luka",
-      usluge: ["injekcija", "infuzije", "previjanja", "vadjenje krvi"],
-      img: "userImg",
-    },
-    {
-      id: 5,
-      ime: "Uros",
-      prezime: "Kljecanin",
-      struka: "tehnicar",
-      mjestoPrebivalista: "Banja Luka",
-      usluge: ["injekcija", "infuzije", "previjanja", "vadjenje krvi"],
-      img: "userImg",
-    },
-    {
-      id: 2,
-      ime: "Andrea",
-      prezime: "Kljecanin-Lazic",
-      struka: "dipl. med. lab. ing.",
-      mjestoPrebivalista: "Banja Luka",
-      usluge: ["injekcija", "infuzije", "vadjenje krvi"],
-      img: "userImg",
-    },
-    {
-      id: 6,
-      ime: "Uros",
-      prezime: "Kljecanin",
-      struka: "tehnicar",
-      mjestoPrebivalista: "Banja Luka",
-      usluge: ["infuzije", "previjanja", "vadjenje krvi"],
-      img: "userImg",
-    },
-  ];
-
+  const { users } = useContext(UserContext);
   const [menu, setMenu] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  const [mjestoPrebivalistaMed, setMjestoPrebivalistaMed] = useState("");
-  const [strukaMed, setStrukaMed] = useState("");
-  const [vrstaUslugeMed, setVrstaUslugeMed] = useState("");
-  const [filteredMedStaff, setFilteredMedStaff] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [filterResult, setFilterResult] = useState({
+    mjestoPrebivalistaMed: gradovi[0].city,
+    strukaMed: struka[0].struka,
+    vrstaUslugeMed: vrsteUsluga[0].usluga,
+  });
 
   const menuRef = useRef(null);
   const navRef = useRef(null);
-
+  showFilter;
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -112,8 +41,8 @@ function LandingPage(props) {
   };
 
   const handleCloseDropdown = () => {
-    menuRef.current.style.display = "none"
-    navRef.current.style.background = "none"
+    menuRef.current.style.display = "none";
+    navRef.current.style.background = "none";
   };
 
   const handleFilterButton = () => {
@@ -126,125 +55,37 @@ function LandingPage(props) {
     if (showFilter === true) {
       setShowFilter(false);
     }
-    setMjestoPrebivalistaMed("");
-    setStrukaMed("");
-    setVrstaUslugeMed("");
+    setFilterResult({
+      mjestoPrebivalistaMed: gradovi[0].city,
+      strukaMed: struka[0].struka,
+      vrstaUslugeMed: vrsteUsluga[0].usluga,
+    });
+    setFilteredUsers([])
   };
 
   const handleMPChange = (e) => {
-    setMjestoPrebivalistaMed(e.target.value);
+    setFilterResult({ ...filterResult, mjestoPrebivalistaMed: e.target.value });
   };
-
   const handleSChange = (e) => {
-    setStrukaMed(e.target.value);
+    setFilterResult({ ...filterResult, strukaMed: e.target.value });
   };
 
   const handleVUChange = (e) => {
-    setVrstaUslugeMed(e.target.value);
+    setFilterResult({ ...filterResult, vrstaUslugeMed: e.target.value });
   };
 
   const handleFilterResults = () => {
-    if (
-      mjestoPrebivalistaMed === "" &&
-      strukaMed === "" &&
-      vrstaUslugeMed === ""
-    ) {
-      setFilteredMedStaff([]);
-    } else if (
-      mjestoPrebivalistaMed !== "" &&
-      strukaMed === "" &&
-      vrstaUslugeMed === ""
-    ) {
-      let filterArray = [];
-      tehnicari.map((medStf, indexMed) => {
-        if (tehnicari[indexMed].mjestoPrebivalista === mjestoPrebivalistaMed) {
-          filterArray.push(medStf);
-          setFilteredMedStaff([...filterArray, tehnicari[indexMed]]);
-        }
-      });
-    } else if (
-      mjestoPrebivalistaMed !== "" &&
-      strukaMed !== "" &&
-      vrstaUslugeMed === ""
-    ) {
-      let filterArray = [];
-      tehnicari.map((medStf, indexMed) => {
-        if (
-          tehnicari[indexMed].mjestoPrebivalista === mjestoPrebivalistaMed &&
-          tehnicari[indexMed].struka == strukaMed
-        ) {
-          filterArray.push(medStf);
-          setFilteredMedStaff([...filterArray, tehnicari[indexMed]]);
-        }
-      });
-    } else if (
-      mjestoPrebivalistaMed !== "" &&
-      strukaMed === "" &&
-      vrstaUslugeMed !== ""
-    ) {
-      let filterArray = [];
-      tehnicari.map((medStf, indexMed) => {
-        if (
-          tehnicari[indexMed].mjestoPrebivalista === mjestoPrebivalistaMed &&
-          tehnicari[indexMed].usluge.includes(vrstaUslugeMed)
-        ) {
-          filterArray.push(medStf);
-          setFilteredMedStaff([...filterArray, tehnicari[indexMed]]);
-        }
-      });
-    } else if (
-      mjestoPrebivalistaMed !== "" &&
-      strukaMed !== "" &&
-      vrstaUslugeMed !== ""
-    ) {
-      let filterArray = [];
-      tehnicari.map((medStf, indexMed) => {
-        if (
-          tehnicari[indexMed].mjestoPrebivalista === mjestoPrebivalistaMed &&
-          tehnicari[indexMed].struka === strukaMed &&
-          tehnicari[indexMed].usluge.includes(vrstaUslugeMed)
-        ) {
-          filterArray.push(medStf);
-          setFilteredMedStaff([...filterArray, tehnicari[indexMed]]);
-        }
-      });
-    } else if (
-      mjestoPrebivalistaMed === "" &&
-      strukaMed !== "" &&
-      vrstaUslugeMed === ""
-    ) {
-      let filterArray = [];
-      tehnicari.map((medStf, indexMed) => {
-        if (tehnicari[indexMed].struka === strukaMed) {
-          filterArray.push(medStf);
-          setFilteredMedStaff([...filterArray, tehnicari[indexMed]]);
-        }
-      });
-    } else if (
-      mjestoPrebivalistaMed === "" &&
-      strukaMed !== "" &&
-      vrstaUslugeMed !== ""
-    ) {
-      let filterArray = [];
-      tehnicari.map((medStf, indexMed) => {
-        if (
-          tehnicari[indexMed].struka === strukaMed &&
-          tehnicari[indexMed].usluge.includes(vrstaUslugeMed)
-        ) {
-          filterArray.push(medStf);
-          setFilteredMedStaff([...filterArray, tehnicari[indexMed]]);
-        }
-      });
-    } else {
-      let filterArray = [];
-      tehnicari.map((medStf, indexMed) => {
-        if (tehnicari[indexMed].usluge.includes(vrstaUslugeMed)) {
-          filterArray.push(medStf);
-          setFilteredMedStaff([...filterArray, tehnicari[indexMed]]);
-        }
-      });
-    }
-    console.log(filteredMedStaff);
+    const newArray = []
+    users.filter((user) => {
+      if (
+        user.mjestoPrebivalista === filterResult.mjestoPrebivalistaMed &&
+        user.struka === filterResult.strukaMed &&
+        user.vrstaUsluga.includes(filterResult.vrstaUslugeMed)
+      ) {
+        newArray.push(user)
+      }
+    });
+    setFilteredUsers(newArray)
   };
 
   return (
@@ -301,17 +142,16 @@ function LandingPage(props) {
       <div className="flex flex-1 justify-center items-center w-full pt-[100px]">
         {showFilter ? (
           <Filter
-            tehnicari={tehnicari}
+            filterResult={filterResult}
+            filteredUsers={filteredUsers}
             handleHideFilter={handleHideFilter}
             handleMPChange={handleMPChange}
             handleSChange={handleSChange}
             handleVUChange={handleVUChange}
             handleFilterResults={handleFilterResults}
-            mjestoPrebivalistaMed={mjestoPrebivalistaMed}
-            strukaMed={strukaMed}
-            vrstaUslugeMed={vrstaUslugeMed}
-            filteredMedStaff={filteredMedStaff}
-            setFilteredMedStaff={setFilteredMedStaff}
+            mjestoPrebivalistaMed={filterResult.mjestoPrebivalistaMed}
+            strukaMed={filterResult.strukaMed}
+            vrstaUslugeMed={filterResult.vrstaUslugeMed}
           />
         ) : (
           <FilterButton
@@ -321,7 +161,7 @@ function LandingPage(props) {
           />
         )}
       </div>
-      <Tehnicari tehnicari={tehnicari} />
+      <Tehnicari users={users} />
     </div>
   );
 }

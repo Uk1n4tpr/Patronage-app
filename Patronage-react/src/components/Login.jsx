@@ -1,5 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 import RegisterBtn from "./RegisterBtn";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +8,8 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
 
   const [data, setData] = useState({
     userName: "",
@@ -24,11 +26,14 @@ export default function Login() {
         email,
         password,
       });
-      if(data.error){
-        toast.error(data.error)
-      }else{
+      if (data.error) {
         setData({});
-        navigate('/dashboard')
+        toast.error(data.error);
+      } else {
+        await axios.get("/profile").then(({ data }) => {
+          setUser(data);
+        });
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);

@@ -1,8 +1,5 @@
 export const struka = [
     {
-        struka: ''
-    },
-    {
         struka: 'tehnicar'
     },
     {
