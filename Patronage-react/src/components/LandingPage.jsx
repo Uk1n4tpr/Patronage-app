@@ -60,7 +60,7 @@ function LandingPage(props) {
       strukaMed: struka[0].struka,
       vrstaUslugeMed: vrsteUsluga[0].usluga,
     });
-    setFilteredUsers([])
+    setFilteredUsers([]);
   };
 
   const handleMPChange = (e) => {
@@ -75,17 +75,17 @@ function LandingPage(props) {
   };
 
   const handleFilterResults = () => {
-    const newArray = []
+    const newArray = [];
     users.filter((user) => {
       if (
         user.mjestoPrebivalista === filterResult.mjestoPrebivalistaMed &&
         user.struka === filterResult.strukaMed &&
         user.vrstaUsluga.includes(filterResult.vrstaUslugeMed)
       ) {
-        newArray.push(user)
+        newArray.push(user);
       }
     });
-    setFilteredUsers(newArray)
+    setFilteredUsers(newArray);
   };
 
   return (

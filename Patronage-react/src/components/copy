@@ -1,93 +1,91 @@
-
-
-        {showFilter ? (
-          <>
-            {mjestoPrebivalistaMed === "" &&
-            strukaMed === "" &&
-            vrstaUslugeMed === "" ? (
-              <Filter
-                tehnicari={tehnicari}
-                handleHideFilter={handleHideFilter}
-                handleMPChange={handleMPChange}
-                handleSChange={handleSChange}
-                handleVUChange={handleVUChange}
-                handleFilterResults={handleFilterResults}
-                mjestoPrebivalistaMed={mjestoPrebivalistaMed}
-                strukaMed={strukaMed}
-                vrstaUslugeMed={vrstaUslugeMed}
-                setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
-                setStrukaMed={setStrukaMed}
-                setVrstaUslugeMed={setVrstaUslugeMed}
-                filteredMedStaff={filteredMedStaff}
-                setFilteredMedStaff={setFilteredMedStaff}
-              />
-            ) : (
-              <>
-                {tehnicari.mjestoPrebivalista === mjestoPrebivalistaMed &&
-                tehnicari.struka === strukaMed ? (
-                  <Filter
-                    tehnicari={tehnicari}
-                    handleHideFilter={handleHideFilter}
-                    handleMPChange={handleMPChange}
-                    handleSChange={handleSChange}
-                    handleVUChange={handleVUChange}
-                    handleFilterResults={handleFilterResults}
-                    mjestoPrebivalistaMed={mjestoPrebivalistaMed}
-                    strukaMed={strukaMed}
-                    vrstaUslugeMed={vrstaUslugeMed}
-                    setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
-                    setStrukaMed={setStrukaMed}
-                    setVrstaUslugeMed={setVrstaUslugeMed}
-                    filteredMedStaff={filteredMedStaff}
-                    setFilteredMedStaff={setFilteredMedStaff}
-                    element={<FilteredMeds />}
-                  />
-                ) : (
-                  <Filter
-                    tehnicari={tehnicari}
-                    handleHideFilter={handleHideFilter}
-                    handleMPChange={handleMPChange}
-                    handleSChange={handleSChange}
-                    handleVUChange={handleVUChange}
-                    handleFilterResults={handleFilterResults}
-                    mjestoPrebivalistaMed={mjestoPrebivalistaMed}
-                    strukaMed={strukaMed}
-                    vrstaUslugeMed={vrstaUslugeMed}
-                    setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
-                    setStrukaMed={setStrukaMed}
-                    setVrstaUslugeMed={setVrstaUslugeMed}
-                    filteredMedStaff={filteredMedStaff}
-                    setFilteredMedStaff={setFilteredMedStaff}
-                    element={<EmptyFilter />}
-                  />
-                )}
-              </>
-            )}
-          </>
-        ) : (
-          <>
-            <FilterButton
-              handleFilterButton={handleFilterButton}
-              showFilter={showFilter}
-              setShowFilter={setShowFilter}
-            />
-          </>
-        )}
-
-        //Filter try
-
-        {mjestoPrebivalistaMed === "" &&
+{
+  showFilter ? (
+    <>
+      {mjestoPrebivalistaMed === "" &&
       strukaMed === "" &&
       vrstaUslugeMed === "" ? (
-        <></>
+        <Filter
+          tehnicari={tehnicari}
+          handleHideFilter={handleHideFilter}
+          handleMPChange={handleMPChange}
+          handleSChange={handleSChange}
+          handleVUChange={handleVUChange}
+          handleFilterResults={handleFilterResults}
+          mjestoPrebivalistaMed={mjestoPrebivalistaMed}
+          strukaMed={strukaMed}
+          vrstaUslugeMed={vrstaUslugeMed}
+          setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
+          setStrukaMed={setStrukaMed}
+          setVrstaUslugeMed={setVrstaUslugeMed}
+          filteredMedStaff={filteredMedStaff}
+          setFilteredMedStaff={setFilteredMedStaff}
+        />
       ) : (
         <>
-          {filteredMedStaff.length === 0 ? <EmptyFilter /> : <FilteredMeds />}
+          {tehnicari.mjestoPrebivalista === mjestoPrebivalistaMed &&
+          tehnicari.struka === strukaMed ? (
+            <Filter
+              tehnicari={tehnicari}
+              handleHideFilter={handleHideFilter}
+              handleMPChange={handleMPChange}
+              handleSChange={handleSChange}
+              handleVUChange={handleVUChange}
+              handleFilterResults={handleFilterResults}
+              mjestoPrebivalistaMed={mjestoPrebivalistaMed}
+              strukaMed={strukaMed}
+              vrstaUslugeMed={vrstaUslugeMed}
+              setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
+              setStrukaMed={setStrukaMed}
+              setVrstaUslugeMed={setVrstaUslugeMed}
+              filteredMedStaff={filteredMedStaff}
+              setFilteredMedStaff={setFilteredMedStaff}
+              element={<FilteredMeds />}
+            />
+          ) : (
+            <Filter
+              tehnicari={tehnicari}
+              handleHideFilter={handleHideFilter}
+              handleMPChange={handleMPChange}
+              handleSChange={handleSChange}
+              handleVUChange={handleVUChange}
+              handleFilterResults={handleFilterResults}
+              mjestoPrebivalistaMed={mjestoPrebivalistaMed}
+              strukaMed={strukaMed}
+              vrstaUslugeMed={vrstaUslugeMed}
+              setMjestoPrebivalistaMed={setMjestoPrebivalistaMed}
+              setStrukaMed={setStrukaMed}
+              setVrstaUslugeMed={setVrstaUslugeMed}
+              filteredMedStaff={filteredMedStaff}
+              setFilteredMedStaff={setFilteredMedStaff}
+              element={<EmptyFilter />}
+            />
+          )}
         </>
       )}
+    </>
+  ) : (
+    <>
+      <FilterButton
+        handleFilterButton={handleFilterButton}
+        showFilter={showFilter}
+        setShowFilter={setShowFilter}
+      />
+    </>
+  );
+}
 
-      ///////////////////////////////////////////////////////
-      /* const handleFilterResults = () => {
+//Filter try
+
+{
+  mjestoPrebivalistaMed === "" && strukaMed === "" && vrstaUslugeMed === "" ? (
+    <></>
+  ) : (
+    <>{filteredMedStaff.length === 0 ? <EmptyFilter /> : <FilteredMeds />}</>
+  );
+}
+
+///////////////////////////////////////////////////////
+/* const handleFilterResults = () => {
     if (
       mjestoPrebivalistaMed === "" &&
       strukaMed === "" &&
@@ -209,24 +207,23 @@
     console.log(filteredMedStaff);
   }; */
 
-  const [mjestoPrebivalistaMed, setMjestoPrebivalistaMed] = useState("");
-  const [strukaMed, setStrukaMed] = useState("");
-  const [vrstaUslugeMed, setVrstaUslugeMed] = useState("");
-  const [filteredMedStaff, setFilteredMedStaff] = useState([]);
+const [mjestoPrebivalistaMed, setMjestoPrebivalistaMed] = useState("");
+const [strukaMed, setStrukaMed] = useState("");
+const [vrstaUslugeMed, setVrstaUslugeMed] = useState("");
+const [filteredMedStaff, setFilteredMedStaff] = useState([]);
 
+/////////proton vpn FK%(Xrsc&p?=OXPU
 
-  /////////proton vpn FK%(Xrsc&p?=OXPU
-  
-  const getFilteredUser = async (req, res) => {
-    const {fonudUser} = req.body;
-    try {
-      const user = await User.findOne({fonudUser});
-      if(!user){
-        console.log('errorfinding user')
-      }
-      res.json(user);
-      console.log(user);
-    } catch (error) {
-      console.log(error);
+const getFilteredUser = async (req, res) => {
+  const { fonudUser } = req.body;
+  try {
+    const user = await User.findOne({ fonudUser });
+    if (!user) {
+      console.log("errorfinding user");
     }
-  };
+    res.json(user);
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -5,7 +5,7 @@ import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 
 function UserView() {
-  const { users, userFound } = useContext(UserContext);
+  const { users, userFound, setUserFound } = useContext(UserContext);
   const [menu, setMenu] = useState(false);
   const [uslugeShow, setUslugeShow] = useState(false);
   const [displayUser, setDisplayUser] = useState({});
@@ -15,15 +15,6 @@ function UserView() {
 
   const menuRef = useRef(null);
   const navRef = useRef(null);
-
-  useEffect(() => {
-    users.filter((user) => {
-      if (user._id === userFound) {
-        setDisplayUser(user);
-      }
-      console.log("user not found");
-    });
-  }, [userFound]);
 
   const handleDropdowMenu = (e) => {
     setMenu(!menu);
@@ -57,6 +48,15 @@ function UserView() {
   };
 
   useEffect(() => {
+    users.filter((user) => {
+      if (user._id === userFound) {
+        setDisplayUser(user);
+      }
+      console.log("user not found");
+    });
+  }, [userFound]);
+
+  useEffect(() => {
     axios
       .get(`/user/${username}/image`)
       .then((response) => setImageBase64(response.data.imageBase64))
@@ -64,6 +64,10 @@ function UserView() {
         console.error("error fetching image: ", error);
       });
   }, [username]);
+
+  useEffect(() => { 
+    setUserFound(null)
+   }, [])
 
   return (
     <div className="flex flex-col justify-center bg-red-700 items-center p-5 text-white">

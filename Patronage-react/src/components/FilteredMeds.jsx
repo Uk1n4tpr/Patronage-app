@@ -1,10 +1,7 @@
 import React from "react";
-import { useState, useRef, useEffect, useContext } from "react";
-import userImg from "../assets/placeholder-200x200.jpg";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import CardFilMed from "./CardFilMed";
-import UserProfileView from "./UserProfileView";
 import { UserContext } from "../../context/UserContext";
 
 export default function FilteredMeds(props) {
@@ -16,8 +13,8 @@ export default function FilteredMeds(props) {
     setUserFound(userId);
   };
 
-  if(userFound !== null){
-    navigate('/UserProfileView')
+  if (userFound !== null) {
+    navigate("/UserProfileView");
   }
 
   return (

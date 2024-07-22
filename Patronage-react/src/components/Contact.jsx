@@ -2,7 +2,10 @@ import React from "react";
 
 export default function Contact() {
   return (
-    <div id="kontakt" className="contact-container flex flex-col text-white justify-evenly items-center bg-[#751212] w-full h-auto py-[200px]">
+    <div
+      id="kontakt"
+      className="contact-container flex flex-col text-white justify-evenly items-center bg-[#751212] w-full h-auto py-[200px]"
+    >
       <p className="py-5 text-[25px]">Kontakt Informacije</p>
       <div className="flex justify-evenly items-center p-3 w-full h-full">
         <div className="flex flex-col rounded-md justify-evenly items-center h-[250px] bg-[#4a0505] w-[15%] text-white ">

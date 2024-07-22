@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import userImg from "../assets/placeholder-200x200.jpg";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 
 export default function Card(props) {
-  const { indexTeh } = props;
+  const { indexTeh, handleProfileView } = props;
   const { users } = useContext(UserContext);
   const [imageBase64, setImageBase64] = useState("");
 
@@ -38,16 +37,16 @@ export default function Card(props) {
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
-          console.log('Server responded with status:', error.response.status);
-          console.log('Error message:', error.response.data);
+          console.log("Server responded with status:", error.response.status);
+          console.log("Error message:", error.response.data);
         } else if (error.request) {
           // The request was made but no response was received
-          console.log('No response received:', error.request);
+          console.log("No response received:", error.request);
         } else {
           // Something happened in setting up the request that triggered an Error
-          console.log('Error message:', error.message);
+          console.log("Error message:", error.message);
         }
-        console.log('Error config:', error.config);
+        console.log("Error config:", error.config);
       });
   }, [username]);
 
@@ -78,7 +77,7 @@ export default function Card(props) {
           <div className="flex justify-center items-center w-[100px] h-[100px] my-2">
             <img
               className="rounded-[50%] w-full h-full"
-              src={userImg}
+              src={`data:image/jpeg;base64,${imageBase64}`}
               alt="user image"
             />
           </div>
@@ -99,7 +98,13 @@ export default function Card(props) {
             })}
           </div>
           <div className="flex justify-center items-center w-[150px] h-[50px] bg-orange-700 rounded-xl m-2 cursor-pointer">
-            <button>Posjetite profil</button>
+            <button
+              onClick={() => {
+                handleProfileView(users[indexTeh]._id);
+              }}
+            >
+              Posjetite profil
+            </button>
           </div>
         </div>
       </div>

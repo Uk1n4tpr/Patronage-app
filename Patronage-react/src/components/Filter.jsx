@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useContext } from "react";
 import FilteredMeds from "./FilteredMeds";
 import EmptyFilter from "./EmptyFilter";
 import { gradovi } from "../API_MINE/gradovi";
@@ -18,7 +17,7 @@ const Filter = (props) => {
     handleFilterResults,
     handleHideFilter,
   } = props;
-  console.log(filteredUsers)
+  console.log(filteredUsers);
   return (
     <div className="filter flex flex-col items-center justify-center w-full h-auto text-center bg-gray-400/35">
       <h1 className="text-white text-1xl font-semibold py-2">
@@ -95,9 +94,7 @@ const Filter = (props) => {
       {filteredUsers.length === 0 ? (
         <EmptyFilter />
       ) : (
-        <FilteredMeds
-          filteredUsers={filteredUsers}
-        />
+        <FilteredMeds filteredUsers={filteredUsers} />
       )}
     </div>
   );

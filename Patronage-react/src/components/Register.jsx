@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
     lastName: "",
@@ -32,10 +32,10 @@ export default function Register() {
       } else {
         setData({});
         toast.success("Registration succesful, Welcome!");
-        navigate('/login')
+        navigate("/login");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 

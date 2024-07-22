@@ -4,7 +4,7 @@ import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import UploadPicture from "./UploadPicture"; 
+import UploadPicture from "./UploadPicture";
 
 function UserProfile() {
   const { user, setUser } = useContext(UserContext);
@@ -78,6 +78,9 @@ function UserProfile() {
         console.error("error fetching image: ", error);
       });
   }, [username]);
+
+  
+
   return (
     <>
       {uploadWindow === true ? (

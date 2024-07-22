@@ -45,10 +45,10 @@ export default function HomePage() {
           <Contact />
         </>
       ) : (
-              <ChoosePage
-                handleChooseProfileMedStaff={handleChooseProfileMedStaff}
-                handleChooseProfilePacient={handleChooseProfilePacient}
-              />
+          <ChoosePage
+            handleChooseProfileMedStaff={handleChooseProfileMedStaff}
+            handleChooseProfilePacient={handleChooseProfilePacient}
+          />
         ) && profileMedStaff ? (
         <LandigPageMedStaff handleBackToChoosePage={handleBackToChoosePage} />
       ) : (

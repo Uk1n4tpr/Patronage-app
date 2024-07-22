@@ -2,13 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import pacientPic from "../assets/pacient-placeholder1.png";
 import tehnicianPic from "../assets/tehnicianPic.jpg";
 import Contact from "./Contact";
-import AboutUs from './AboutUs'
+import AboutUs from "./AboutUs";
 
 export default function ChoosePage(props) {
   const { handleChooseProfileMedStaff, handleChooseProfilePacient } = props;
 
   const [menu, setMenu] = useState(false);
-  
 
   const menuRef = useRef(null);
   const navRef = useRef(null);
@@ -28,8 +27,8 @@ export default function ChoosePage(props) {
   };
 
   const handleCloseDropdown = () => {
-    menuRef.current.style.display = "none"
-    navRef.current.style.background = "none"
+    menuRef.current.style.display = "none";
+    navRef.current.style.background = "none";
   };
 
   useEffect(() => {
@@ -45,10 +44,7 @@ export default function ChoosePage(props) {
             className="flex justify-between items-center navbar-phone w-full"
           >
             <div className="logo w-[50px] text-white text-4xl p-2">
-              <i
-                
-                className="fa-solid fa-truck-medical"
-              ></i>
+              <i className="fa-solid fa-truck-medical"></i>
             </div>
             <div
               className="flex flex-col cursor-pointer justify-around items-center hamburger w-[40px] h-[80%] p-1"
@@ -64,9 +60,7 @@ export default function ChoosePage(props) {
             className="navbar-ul z-10 flex-col justify-center items-center hidden w-full"
           >
             <ul className="flex flex-col justify-evenly text-center items-center text-white bg-orange-400 w-full rounded-b-md">
-              <li
-                className="p-3 rounded-md cursor-pointer w-[40%]"
-              >
+              <li className="p-3 rounded-md cursor-pointer w-[40%]">
                 <a href="#">Početna</a>
               </li>
               <li className="p-3 rounded-md cursor-pointer w-[40%]">

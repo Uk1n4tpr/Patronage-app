@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import userImg from "../assets/placeholder-200x200.jpg";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 export default function CardFilMed(props) {
@@ -78,7 +77,7 @@ export default function CardFilMed(props) {
           <div className="flex justify-center items-center w-[100px] h-[100px] my-2">
             <img
               className="rounded-[50%] w-full h-full"
-              src={userImg}
+              src={`data:image/jpeg;base64,${imageBase64}`}
               alt="user image"
             />
           </div>
