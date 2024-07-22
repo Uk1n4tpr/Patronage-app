@@ -2,12 +2,16 @@ import React from "react";
 import { useRef, useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+import axios from "axios";
 
 function UserView() {
   const { users, userFound } = useContext(UserContext);
   const [menu, setMenu] = useState(false);
   const [uslugeShow, setUslugeShow] = useState(false);
   const [displayUser, setDisplayUser] = useState({});
+  const [imageBase64, setImageBase64] = useState("");
+
+  const username = displayUser.userName;
 
   const menuRef = useRef(null);
   const navRef = useRef(null);
@@ -51,6 +55,16 @@ function UserView() {
   const hideUsluge = () => {
     setUslugeShow(false);
   };
+
+  useEffect(() => {
+    axios
+      .get(`/user/${username}/image`)
+      .then((response) => setImageBase64(response.data.imageBase64))
+      .catch((error) => {
+        console.error("error fetching image: ", error);
+      });
+  }, [username]);
+
   return (
     <div className="flex flex-col justify-center bg-red-700 items-center p-5 text-white">
       <div className="flex-col navbar w-screen h-[50px] flex justify-between items-center fixed top-0">
@@ -78,7 +92,7 @@ function UserView() {
         >
           <ul className="flex flex-col justify-evenly text-center items-center text-white bg-orange-400 w-full rounded-b-md">
             <li className="p-3 rounded-md cursor-pointer w-[40%]">
-              <Link to={"/"}>Pocetna</Link>
+              <Link to={"/"}>Početna</Link>
             </li>
           </ul>
         </div>
@@ -86,7 +100,7 @@ function UserView() {
       <div className="flex justify-center items-center rounded-[50%] w-[200px] h-[200px] mt-[100px]">
         <img
           className="w-full h-full rounded-[50%] bg-white"
-          src={displayUser.image}
+          src={`data:image/jpeg;base64,${imageBase64}`}
           alt=""
         />
       </div>
@@ -113,7 +127,7 @@ function UserView() {
           </div>
         ) : (
           <div className="font-semibold bg-orange-400 p-4 rounded-3xl cursor-pointer ">
-            <button onClick={showUsluge}>PRIKAZI USLUGE</button>
+            <button onClick={showUsluge}>PRIKAŽI USLUGE</button>
           </div>
         )}
       </div>
@@ -133,7 +147,7 @@ function UserView() {
         </div>
         <div className="font-semibold">
           <h2>
-            <span className="text-orange-400">Mjesto prebivalista:</span>{" "}
+            <span className="text-orange-400">Mjesto prebivališta:</span>{" "}
             {displayUser.mjestoPrebivalista}
           </h2>
         </div>

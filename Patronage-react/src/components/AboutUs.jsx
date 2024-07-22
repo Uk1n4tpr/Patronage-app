@@ -9,7 +9,7 @@ const AboutUs = () => {
           <p>
             Ova aplikacija je osnovana sa ciljem unapredjivanja njege pacijenata
             koji nisu u stanju da dodju u ambulantu radi neophodne terapije.
-            Takodje da kolegama tehnicarima obezbjedi dodatan posao ili
+            Takodje da kolegama tehničarima obezbjedi dodatan posao ili
             nezaposlenim kolegama da mogu zaraditi. Zasnovana je na nacinu
             bodovanja tehnicara i recenzija koje pacijenti mogu ostaviti na
             osnovu dobijene usluge.

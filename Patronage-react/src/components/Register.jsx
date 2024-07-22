@@ -87,7 +87,7 @@ export default function Register() {
               />
             </div>
             <div className="flex flex-col justify-center items-center py-3 w-full text-[20px] font-semibold">
-              <label>KORISNICKO IME</label>
+              <label>KORISNIČKO IME</label>
               <input
                 className="text-center rounded-xl w-[90%] h-[45px] bg-[#ac0909a9]"
                 type="text"

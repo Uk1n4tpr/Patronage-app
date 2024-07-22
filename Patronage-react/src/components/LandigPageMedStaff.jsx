@@ -15,7 +15,7 @@ export default function LandigPageMedStaff(props) {
       </div>
       <div className="font-semibold text-justify p-5 text-[25px]">
         <p className="tracking-[-0.1rem]">
-          Dobro dosli, ukoliko nemate napravljen nalog na aplikaciji pritisnite
+          Dobro došli, ukoliko nemate napravljen nalog na aplikaciji pritisnite
           <span className="text-[30px] text-orange-400">
             {" "}
             Registracija

@@ -4,7 +4,7 @@ import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import UploadPicture from "./UploadPicture";
+import UploadPicture from "./UploadPicture"; 
 
 function UserProfile() {
   const { user, setUser } = useContext(UserContext);
@@ -111,7 +111,7 @@ function UserProfile() {
           >
             <ul className="flex flex-col justify-evenly text-center items-center text-white bg-orange-400 w-full rounded-b-md">
               <li className="p-3 rounded-md cursor-pointer w-[40%]">
-                <Link to={"/"}>Pocetna</Link>
+                <Link to={"/"}>Početna</Link>
               </li>
               <li className="p-3 rounded-md cursor-pointer w-[40%]">
                 <Link to={"/profileSetLogged"}>Preuredite Profil</Link>
@@ -160,7 +160,7 @@ function UserProfile() {
             </div>
           ) : (
             <div className="font-semibold bg-orange-400 p-4 rounded-3xl cursor-pointer ">
-              <button onClick={showUsluge}>PRIKAZI USLUGE</button>
+              <button onClick={showUsluge}>PRIKAŽI USLUGE</button>
             </div>
           )}
         </div>
@@ -180,7 +180,7 @@ function UserProfile() {
           </div>
           <div className="font-semibold">
             <h2>
-              <span className="text-orange-400">Mjesto prebivalista:</span>{" "}
+              <span className="text-orange-400">Mjesto prebivališta:</span>{" "}
               {user.mjestoPrebivalista}
             </h2>
           </div>

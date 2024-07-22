@@ -13,7 +13,7 @@ export default function Contact() {
         </div>
         <div className="contact-info-text flex flex-col rounded-md justify-evenly items-center h-[250px] bg-[#4a0505]  w-[75%] text-white">
           <p className="w-full px-1 text-left text-sm">
-            <span className="text-[20px]">Korisnicka podrska:</span>{" "}
+            <span className="text-[20px]">Korisnička podrška:</span>{" "}
             0038765294798
           </p>
           <p className="w-full px-2 text-left text-sm">

@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import userImg from "../assets/placeholder-200x200.jpg";
 import { UserContext } from "../../context/UserContext";
+import axios from "axios";
 
 export default function Card(props) {
   const { indexTeh } = props;
-  const {users} = useContext(UserContext)
+  const { users } = useContext(UserContext);
+  const [imageBase64, setImageBase64] = useState("");
+
+  const username = users[indexTeh].userName;
 
   const userRef = useRef(null);
 
@@ -26,12 +30,33 @@ export default function Card(props) {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get(`/user/${username}/image`)
+      .then((response) => setImageBase64(response.data.imageBase64))
+      .catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log('Server responded with status:', error.response.status);
+          console.log('Error message:', error.response.data);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log('No response received:', error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error message:', error.message);
+        }
+        console.log('Error config:', error.config);
+      });
+  }, [username]);
+
   return (
     <div className="flex flex-col justify-between items-center rounded-lg p-2 text-white text-sm text-center bg-orange-400 max-w-[120px] h-[270px]">
       <div className="flex justify-center items-center w-[100px] h-[100px] my-2">
         <img
           className="rounded-[50%] w-full h-full"
-          src={userImg}
+          src={`data:image/jpeg;base64,${imageBase64}`}
           alt="user image"
         />
       </div>
@@ -61,7 +86,7 @@ export default function Card(props) {
           <p className="p-2">Prezime: {users[indexTeh].lastName}</p>
           <p className="p-2">Struka: {users[indexTeh].struka}</p>
           <p className="p-2">
-            Mjesto prebivalista: {users[indexTeh].mjestoPrebivalista}
+            Mjesto prebivališta: {users[indexTeh].mjestoPrebivalista}
           </p>
           <div className="p-2  flex-col">
             Usluge:{" "}

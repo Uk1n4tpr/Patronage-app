@@ -67,7 +67,7 @@ export default function ChoosePage(props) {
               <li
                 className="p-3 rounded-md cursor-pointer w-[40%]"
               >
-                <a href="#">Pocetna</a>
+                <a href="#">Početna</a>
               </li>
               <li className="p-3 rounded-md cursor-pointer w-[40%]">
                 <a href="#razlog-posjete" onClick={handleCloseDropdown}>
@@ -89,12 +89,12 @@ export default function ChoosePage(props) {
         </div>
         <div className="flex tracking-[-0.1rem] justify-center items-center flex-col h-full w-full p-5 text-justify gap-20">
           <h1 className="text-[40px] font-semibold text-[#f8b931] w-full text-center">
-            Dobrodosli
+            Dobrodošli
           </h1>
           <p className="px-10 tracking-[-0.1rem] text-[20px] font-semibold">
-            Ovo je aplikacija za pacijente u potrazi za odgovarajucom
+            Ovo je aplikacija za pacijente u potrazi za odgovarajućom
             medicinskom uslugom i najkompatibilnije medicinsko osoblje koje ce
-            tu uslugu da pruzi pacijentu.
+            tu uslugu da pruži pacijentu.
           </p>
           <button className="bg-[#f8b931] hover:bg-orange-600 w-[100px] h-[50px] rounded-lg cursor-pointer">
             <p>
@@ -111,7 +111,7 @@ export default function ChoosePage(props) {
           className="text-center font-semibold text-[30px] px-3
         "
         >
-          IZABERITE RAZLOG VASE POSJETE
+          IZABERITE RAZLOG VAŠE POSJETE
         </p>
         <div className="flex flex-col md:flex-row lg:flex-row justify-center items-center rounded-md  p-4 w-[60%]">
           <div
@@ -120,7 +120,7 @@ export default function ChoosePage(props) {
             className="cursor-pointer pacient rounded-md bg-orange-400 hover:bg-orange-600 flex justify-center items-center flex-col py-[10px] m-2"
           >
             <img className="rounded-md p-4" src={pacientPic} alt="pacient" />
-            <p>Pacient</p>
+            <p>Pacijent</p>
           </div>
           <div
             onClick={handleChooseProfileMedStaff}

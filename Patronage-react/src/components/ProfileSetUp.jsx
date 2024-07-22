@@ -127,7 +127,7 @@ function ProfileSetUp() {
         >
           <ul className="flex flex-col justify-evenly text-center items-center text-white bg-orange-400 w-full rounded-b-md">
             <li className="p-3 rounded-md cursor-pointer w-[40%]">
-              <Link to={"/"}>Pocetna</Link>
+              <Link to={"/"}>Početna</Link>
             </li>
             <li className="p-3 rounded-md cursor-pointer w-[40%]">
               <a href="#kontakt" onClick={handleCloseDropdown}>
@@ -140,8 +140,8 @@ function ProfileSetUp() {
       <div className="flex flex-col justify-center items-center m-5 mt-[100px]">
         <div className="p-3 text-2xl bg-[#d54848] rounded-lg">
           <h1>
-            Popunite sto vise podataka o sebi za vecu mogucnost da pacijent
-            izabere vas za uslugu!
+            Popunite sto više podataka o sebi za veću mogućnost da pacijent
+            izabere vas za uslugu
           </h1>
         </div>
         <div className="flex flex-col justify-center items-center w-full">
@@ -193,7 +193,7 @@ function ProfileSetUp() {
                 />
               </div>
               <div className="flex flex-col justify-center items-center w-full py-5">
-                <label>MJESTO PREBIVALISTA</label>
+                <label>MJESTO PREBIVALIŠTA</label>
                 <select
                   value={profile.mjestoPrebivalistaCheck}
                   onChange={(e) => {
@@ -256,12 +256,12 @@ function ProfileSetUp() {
                     onClick={handleCheckboxSubmit}
                     className="bg-orange-400 rounded-xl text-md"
                   >
-                    PRILOZITE VRSTE USLUGA
+                    PRILOŽITE VRSTE USLUGA
                   </button>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center w-full py-5">
-                <label>GODINE STAZA</label>
+                <label>GODINE STAŽA</label>
                 <input
                   value={profile.godineStazaCheck}
                   onChange={(e) => {
@@ -275,7 +275,7 @@ function ProfileSetUp() {
                 />
               </div>
               <div className="flex flex-col justify-center items-center w-full py-5">
-                <label>NESTO O SEBI</label>
+                <label>NEŠTO O SEBI</label>
                 <textarea
                   value={profile.oKorisnikuCheck}
                   onChange={(e) => {

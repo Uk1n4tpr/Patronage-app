@@ -7,10 +7,19 @@ export default function UploadPicture(props) {
   const { user } = useContext(UserContext);
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
-  
+  const [imagePreview, setImagePreview] = useState(null);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      setFile(file);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,21 +57,31 @@ export default function UploadPicture(props) {
       </div>
       <div className="flex flex-col gap-3 text-white bg-gray-500/95 rounded-xl p-4 justify-center items-center">
         <div className="w-[200px] h-[200px] border-[3px] border-black rounded-[50%] flex justify-center text-center items-center text-black cursor-pointer">
-          <div className="flex flex-col justify-center items-center gap-3">
-            <input
-              type="file"
-              id="userImgUpl"
-              className="hidden"
-              onChange={handleFileChange}
-            />
-            <label
-              className="flex flex-col justify-center items-center cursor-pointer"
-              htmlFor="userImgUpl"
-            >
-              <i className="fa-solid fa-file-arrow-up text-4xl"></i>
-              <h2 className="font-semibold text-lg">Postavite sliku profila</h2>
-            </label>
-          </div>
+          {imagePreview ? (
+            <div>
+              <img src={imagePreview} className="w-full h-full rounded-[50%]" />
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col justify-center items-center gap-3">
+                <input
+                  type="file"
+                  id="userImgUpl"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+                <label
+                  className="flex flex-col justify-center items-center cursor-pointer"
+                  htmlFor="userImgUpl"
+                >
+                  <i className="fa-solid fa-file-arrow-up text-4xl"></i>
+                  <h2 className="font-semibold text-lg">
+                    Postavite sliku profila
+                  </h2>
+                </label>
+              </div>
+            </>
+          )}
         </div>
         <div className="bg-gray-800 p-3 rounded-xl cursor-pointer">
           <button type="submit">Postavite</button>

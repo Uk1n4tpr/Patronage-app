@@ -22,7 +22,7 @@ const Filter = (props) => {
   return (
     <div className="filter flex flex-col items-center justify-center w-full h-auto text-center bg-gray-400/35">
       <h1 className="text-white text-1xl font-semibold py-2">
-        Pretrazite najblizu i najbolju uslugu za Vas
+        Pretražite najbližu i najbolju uslugu za Vas
       </h1>
       <div className="filter-container flex flex-col justify-center items-center text-white font-semibold text-[13px] py-4">
         <form
@@ -30,7 +30,7 @@ const Filter = (props) => {
           action=""
         >
           <div className="filter-input flex flex-col px-4 text-center py-2">
-            <label className="py-2">Mjesto prebivalista</label>
+            <label className="py-2">Mjesto prebivališta</label>
             <select
               onChange={handleMPChange}
               className="w-[200px] h-[25px] text-center text-semibold text-black rounded-xl bg-orange-400"
@@ -82,7 +82,7 @@ const Filter = (props) => {
           onClick={handleFilterResults}
           className="filter-butto cursor-pointer flex justify-center items-center text-center py-n mx-3 bg-orange-600 w-[100px] h-[30px] rounded-xl"
         >
-          <button className="">Pretrazi</button>
+          <button className="">Pretraži</button>
           <i className="fa-solid fa-magnifying-glass px-2"></i>
         </div>
       </div>
