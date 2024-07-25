@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Comment = require("../models/Comments");
 const {
   hashPassword,
   comparePasswords,
@@ -8,7 +9,7 @@ const session = require("express-session");
 const multer = require("multer");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
-const fs = require('fs')
+const fs = require("fs");
 
 const test = (req, res) => {
   res.json("test is working");
@@ -249,18 +250,56 @@ const setImage = async (req, res) => {
       return res.status(404).json({ error: "user not found" });
     }
 
-    const filename = path.basename(user.image)
-    const imagePath = path.join(__dirname, '../uploads', filename);
+    const filename = path.basename(user.image);
+    const imagePath = path.join(__dirname, "../uploads", filename);
 
-    if(!fs.existsSync(imagePath)){
-      return res.status(404).json({error: 'image file not found'})
+    if (!fs.existsSync(imagePath)) {
+      return res.status(404).json({ error: "image file not found" });
     }
-    const imageBase64 = fs.readFileSync(imagePath, {encoding:'base64'})
+    const imageBase64 = fs.readFileSync(imagePath, { encoding: "base64" });
 
     res.json({ imageBase64 });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "server error" });
+  }
+};
+
+const postComment = async (req, res) => {
+  try {
+    const { userId, name, comment, userName } = req.body;
+
+    // Create new comment using Comment model
+    const newComment = new Comment({
+      userId,
+      name,
+      comment,
+      userName,
+    });
+
+    // Save the comment
+    await newComment.save();
+
+    res
+      .status(201)
+      .json({ message: "Comment created successfully", comment: newComment });
+  } catch (err) {
+    console.error("Error creating comment:", err);
+    res
+      .status(500)
+      .json({ message: "Failed to create comment", error: err.message });
+  }
+};
+
+const getComments = async (req, res) => {
+  try {
+    const username = req.params.userName;
+    const comments = await Comment.find({userName: username}).sort({ created: -1 }); // Fetch comments sorted by creation date (newest first)
+    console.log(comments)
+    res.json(comments);
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    res.status(500).json({ error: "Failed to fetch comments" });
   }
 };
 
@@ -274,4 +313,6 @@ module.exports = {
   getUsers,
   uploadImg,
   setImage,
+  postComment,
+  getComments,
 };

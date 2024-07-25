@@ -11,10 +11,10 @@ const {
   getUsers,
   uploadImg,
   setImage,
+  postComment,
+  getComments,
 } = require("../controlers/authControler");
-const multer = require("multer");
-const path = require("path");
-const { v4: uuidv4 } = require("uuid");
+
 
 //middleware
 router.use(
@@ -33,5 +33,7 @@ router.get("/logout", logOut);
 router.get("/usersFind", getUsers);
 router.post("/upload", uploadImg);
 router.get('/user/:username/image', setImage)
+router.post('/commentPost', postComment)
+router.get('/comments/:userName', getComments)
 
 module.exports = router;

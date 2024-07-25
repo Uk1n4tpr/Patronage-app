@@ -174,7 +174,7 @@ function UserProfile() {
           </div>
           <div className="font-semibold py3">
             <h2>
-              <span className="text-orange-400">Ime i Prezime:</span>{" "}
+              <span className="text-orange-400">Ime i Prezime: </span>{" "}
               {user.name} {user.lastName}
             </h2>
           </div>
@@ -183,7 +183,7 @@ function UserProfile() {
           </div>
           <div className="font-semibold">
             <h2>
-              <span className="text-orange-400">Mjesto prebivališta:</span>{" "}
+              <span className="text-orange-400">Mjesto prebivališta: </span>{" "}
               {user.mjestoPrebivalista}
             </h2>
           </div>
@@ -192,26 +192,26 @@ function UserProfile() {
             <div className="flex justify-start items-center">
               <i className="px-2 fa-solid fa-envelope"></i>
               <h1>
-                <span className="text-orange-400">email:</span> {user.email}
+                <span className="text-orange-400">email: </span> {user.email}
               </h1>
             </div>
             <div className="flex justify-start items-center">
               <i className="px-2 fa-solid fa-phone"></i>
               <h2>
-                <span className="text-orange-400">tel:</span> {user.phone}
+                <span className="text-orange-400">tel: </span> {user.phone}
               </h2>
             </div>
             <div className="flex justify-start items-center">
               <i className="px-2 fa-brands fa-square-facebook"></i>
               <h2>
-                <span className="text-orange-400">facebook:</span>
+                <span className="text-orange-400">facebook: </span>
                 {user.facebook}
               </h2>
             </div>
             <div className="flex justify-start items-center">
               <i className="px-2 fa-brands fa-square-instagram"></i>
               <h2>
-                <span className="text-orange-400">instagram:</span>
+                <span className="text-orange-400">instagram: </span>
                 {user.instagram}
               </h2>
             </div>

@@ -3,6 +3,7 @@ import { useRef, useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
+import Coments from "./Coments";
 
 function UserView() {
   const { users, userFound, setUserFound } = useContext(UserContext);
@@ -12,6 +13,7 @@ function UserView() {
   const [imageBase64, setImageBase64] = useState("");
 
   const username = displayUser.userName;
+  const user_id = displayUser._id
 
   const menuRef = useRef(null);
   const navRef = useRef(null);
@@ -65,9 +67,9 @@ function UserView() {
       });
   }, [username]);
 
-  useEffect(() => { 
-    setUserFound(null)
-   }, [])
+  useEffect(() => {
+    setUserFound(null);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center bg-red-700 items-center p-5 text-white">
@@ -142,7 +144,7 @@ function UserView() {
         </div>
         <div className="font-semibold py3">
           <h2>
-            <span className="text-orange-400">Ime i Prezime:</span>{" "}
+            <span className="text-orange-400">Ime i Prezime: </span>{" "}
             {displayUser.name} {displayUser.lastName}
           </h2>
         </div>
@@ -151,7 +153,7 @@ function UserView() {
         </div>
         <div className="font-semibold">
           <h2>
-            <span className="text-orange-400">Mjesto prebivališta:</span>{" "}
+            <span className="text-orange-400">Mjesto prebivališta: </span>{" "}
             {displayUser.mjestoPrebivalista}
           </h2>
         </div>
@@ -160,32 +162,33 @@ function UserView() {
           <div className="flex justify-start items-center">
             <i className="px-2 fa-solid fa-envelope"></i>
             <h1>
-              <span className="text-orange-400">email:</span>{" "}
+              <span className="text-orange-400">email: </span>{" "}
               {displayUser.email}
             </h1>
           </div>
           <div className="flex justify-start items-center">
             <i className="px-2 fa-solid fa-phone"></i>
             <h2>
-              <span className="text-orange-400">tel:</span> {displayUser.phone}
+              <span className="text-orange-400">tel: </span> {displayUser.phone}
             </h2>
           </div>
           <div className="flex justify-start items-center">
             <i className="px-2 fa-brands fa-square-facebook"></i>
             <h2>
-              <span className="text-orange-400">facebook:</span>
+              <span className="text-orange-400">facebook: </span>
               {displayUser.facebook}
             </h2>
           </div>
           <div className="flex justify-start items-center">
             <i className="px-2 fa-brands fa-square-instagram"></i>
             <h2>
-              <span className="text-orange-400">instagram:</span>
+              <span className="text-orange-400">instagram: </span>
               {displayUser.instagram}
             </h2>
           </div>
         </div>
       </div>
+      <Coments user_id={user_id} username={username} />
     </div>
   );
 }

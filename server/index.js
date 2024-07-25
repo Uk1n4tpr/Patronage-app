@@ -3,12 +3,14 @@ const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const PORT = 8000;
 const session = require("express-session");
-const path = require('path')
+const path = require('path');
+const cors = require('cors'); // Import cors module
 
 const app = express();
 
+// MongoDB connection
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("MongoDB connected");
   })
@@ -16,8 +18,7 @@ mongoose
     console.log(err);
   });
 
-//middleware
-
+// Middleware
 app.use(
   session({
     name: process.env.SESSION_NAME,
@@ -32,10 +33,18 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// CORS configuration
+app.use(cors({
+  credentials: true,
+  origin: "http://localhost:5173", // Replace with your frontend URL
+}));
+
+// Routes
 app.use("/", require("./routes/auth"));
 
+// Start server
 app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
