@@ -174,8 +174,32 @@ const profileSetUp = async (req, res) => {
       godineStazaCheck,
       oKorisnikuCheck,
     } = req.body;
-    const filter = await User.findOne({ email });
-    const update = {
+
+    // Find the user by email
+    const filter = { email };
+    const user = await User.findOne(filter);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Prepare the pull array
+    const pullArray = user.vrstaUsluga.filter((usluga) =>
+      vrsteUslugaCheck.includes(usluga)
+    );
+
+    // Update operation to pull items
+    await User.updateOne(filter, {
+      $pull: { vrstaUsluga: { $in: pullArray } },
+    });
+
+    // Update operation to push new items
+    await User.updateOne(filter, {
+      $push: { vrstaUsluga: { $each: vrsteUslugaCheck } },
+    });
+
+    // Update other fields
+    await User.updateOne(filter, {
       $set: {
         phone: phone,
         facebook: facebook,
@@ -186,14 +210,16 @@ const profileSetUp = async (req, res) => {
         oKorisniku: oKorisnikuCheck,
         firstLogin: 1,
       },
-      $push: { vrstaUsluga: { $each: vrsteUslugaCheck } },
-    };
-    const options = { upsert: false };
-    const result = await User.updateOne(filter, update, options);
-    res.json(result);
-    getProfile(req, res);
+    });
+
+    // Send response
+    res.json({ message: "Profile updated successfully" });
+
+    // Call getProfile function (assumed to be defined elsewhere)
+    /* getProfile(req, res); */
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -294,8 +320,10 @@ const postComment = async (req, res) => {
 const getComments = async (req, res) => {
   try {
     const username = req.params.userName;
-    const comments = await Comment.find({userName: username}).sort({ created: -1 }); // Fetch comments sorted by creation date (newest first)
-    console.log(comments)
+    const comments = await Comment.find({ userName: username }).sort({
+      created: -1,
+    }); // Fetch comments sorted by creation date (newest first)
+    console.log(comments);
     res.json(comments);
   } catch (error) {
     console.error("Error fetching comments:", error);
