@@ -140,7 +140,9 @@ function Comment(props) {
           ) : (
             <>
               {replyes.replies.map((reply, index) => {
-                return <p key={index}>{reply}</p>;
+                if (reply !== "") {
+                  return <p key={index}>{reply}</p>;
+                }
               })}
             </>
           )}
