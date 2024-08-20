@@ -6,7 +6,8 @@ const commentSchema = new Schema({
   name: { type: String, default: 'pacijent' },
   comment: { type: String, required: true },
   created: { type: Date, default: Date.now, required: true },
-  userName: {type: String}
+  userName: {type: String},
+  replies: {type: Array, default: []}
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

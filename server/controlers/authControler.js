@@ -293,7 +293,7 @@ const setImage = async (req, res) => {
 
 const postComment = async (req, res) => {
   try {
-    const { userId, name, comment, userName } = req.body;
+    const { userId, name, comment, userName, replies } = req.body;
 
     // Create new comment using Comment model
     const newComment = new Comment({
@@ -301,6 +301,7 @@ const postComment = async (req, res) => {
       name,
       comment,
       userName,
+      replies,
     });
 
     // Save the comment
@@ -331,6 +332,34 @@ const getComments = async (req, res) => {
   }
 };
 
+const commentReply = async (req, res) => {
+  try {
+    const replyBody = req.body.reply;
+    console.log(replyBody);
+    const comment = req.params;
+    const filter = await Comment.findOne(comment);
+    const update = {
+      $push: { replies: replyBody },
+    };
+    const result = await Comment.updateOne(filter, update);
+    res.json(result);
+    console.log(result);
+  } catch (error) {
+    console.error({ message: error.message });
+  }
+};
+
+const getReplyes = async (req, res) => {
+  try {
+    const comment = req.params;
+    const filter = await Comment.findOne(comment);
+    console.log(filter.replies);
+    res.json(filter);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   test,
   registerUser,
@@ -343,4 +372,6 @@ module.exports = {
   setImage,
   postComment,
   getComments,
+  commentReply,
+  getReplyes,
 };

@@ -13,6 +13,8 @@ const {
   setImage,
   postComment,
   getComments,
+  commentReply,
+  getReplyes,
 } = require("../controlers/authControler");
 
 
@@ -35,5 +37,7 @@ router.post("/upload", uploadImg);
 router.get('/user/:username/image', setImage)
 router.post('/commentPost', postComment)
 router.get('/comments/:userName', getComments)
+router.post('/comment-reply/:comment', commentReply)
+router.get('/fetch-replyes/:comment', getReplyes)
 
 module.exports = router;

@@ -125,17 +125,15 @@ function Coments(props) {
         </form>
       </div>
       <div className="w-full flex justify-center items-center flex-col py-5">
-        <div className="flex flex-col justify-center items-center gap-3">
+        <div className="flex flex-col justify-center items-center gap-3 w-full">
           <h2 className="font-semibold text-xl">Ostali komentari</h2>
-          <i
-            onClick={handleCommentsShow}
-            ref={showCommentsRef}
-            className="fa-solid fa-caret-down text-4xl cursor-pointer"
-          ></i>
+          <div onClick={handleCommentsShow} ref={showCommentsRef}>
+            <i className="fa-solid fa-caret-down text-4xl cursor-pointer"></i>
+          </div>
         </div>
         <div
           ref={commentsRef}
-          className="hidden flex-col justify-center items-center w-full"
+          className="hidden flex-col justify-center items-center w-full cursor-pointer"
         >
           <i
             onClick={() => {
@@ -147,7 +145,7 @@ function Coments(props) {
           ></i>
           <div className="w-full flex flex-col justify-center items-center gap-3">
             {comments.map((com, indexCom) => {
-              return <Comment com={com} indexCom={indexCom} comments={comments} />;
+              return <Comment com={com} />;
             })}
           </div>
         </div>
